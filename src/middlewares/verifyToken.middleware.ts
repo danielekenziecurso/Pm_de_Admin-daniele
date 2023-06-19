@@ -15,9 +15,8 @@ const verifyTokenMiddleware = (
   verify(token, process.env.SECRET_KEY!, (err, decoded) => {
     if (err) throw new Unauthorized(err.message, 401);
     res.locals = { ...res.locals, decoded };
+    next();
   });
-
-  return next();
 };
 
 export { verifyTokenMiddleware };

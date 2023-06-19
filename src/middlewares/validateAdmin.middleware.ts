@@ -7,7 +7,7 @@ const validateAdminMiddleware = async (
   next: NextFunction
 ): Promise<void> => {
   const { admin } = res.locals.decoded;
-
+  console.log(admin)
   if (admin === "false") throw new AppError("Insufficient permission", 403);
 
   return next();

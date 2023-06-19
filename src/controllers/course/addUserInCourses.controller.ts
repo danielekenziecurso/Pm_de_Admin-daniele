@@ -5,9 +5,10 @@ const addUserInCourseController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const { userId, courseId } = req.params;
-
-  const addUserCourses = await addUserInCoursesService(userId, courseId);
+  const { userId, courseId} = req.params;
+  const { admin } = res.locals.decoded;
+   
+  const addUserCourses = await addUserInCoursesService(userId, courseId, admin);
 
   return res.status(201).json(addUserCourses);
 };

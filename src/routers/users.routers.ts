@@ -28,8 +28,8 @@ clientUsers.get(
 clientUsers.get(
   "/:id/courses",
   verifyTokenMiddleware,
-  validateAdminMiddleware,
   verifyUserPermissionMiddleware,
+  validateAdminMiddleware,
   validateCourseExistsMiddleware,
   userGetByIdController
 );

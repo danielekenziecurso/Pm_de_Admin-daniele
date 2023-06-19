@@ -9,6 +9,7 @@ import { addUserInCourseController } from "../controllers/course/addUserInCourse
 import { verifyUserAndCourseExistsMiddleware } from "../middlewares/verifyUserAndCourseExists.middleware";
 import { deleteUserFromCourseByIdController } from "../controllers/course/deleteUserFromCourseById.controller";
 import { courseGetByIdController } from "../controllers/course/courseGetById.controller";
+import { verifyUserPermissionMiddleware } from "../middlewares/verifyUserPermission.middleware";
 
 const clientCourses: Router = Router();
 
@@ -29,6 +30,7 @@ clientCourses.post(
   "/:courseId/users/:userId",
   verifyTokenMiddleware,
   validateAdminMiddleware,
+  verifyUserPermissionMiddleware,
   verifyUserAndCourseExistsMiddleware,
   addUserInCourseController
 );
