@@ -3,7 +3,7 @@ import { client } from "../../database";
 import { UserCourse } from "../../interfaces/UserCourse.interface";
 import { AppError } from "../../error";
 
-const userGetByIdService = async (id: number): Promise<UserCourse> => {
+const userGetByIdService = async (id: number) => {
   const queryTemplate: string = `
       SELECT
          "c".id AS "courseId",
@@ -22,7 +22,7 @@ const userGetByIdService = async (id: number): Promise<UserCourse> => {
        "u".id = $1;
 
     `;
-  const queryResult: QueryResult<UserCourse> = await client.query(
+  const queryResult = await client.query(
     queryTemplate,
     [id]
   );
@@ -34,10 +34,10 @@ const userGetByIdService = async (id: number): Promise<UserCourse> => {
   const courseViculado = courseQuery.rowCount > 0;
 
   if (!courseViculado) {
-    throw new AppError("Usuário não possui cursos vinculados", 404);
+    throw new AppError("No course found", 404);
   }
   
-  return queryResult.rows[0];
+  return queryResult.rows;
 };
 
 export { userGetByIdService };

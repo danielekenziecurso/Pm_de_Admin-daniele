@@ -13,7 +13,7 @@ const createUserService = async (payload: UserCreate): Promise<UserReturn> => {
            (%I)        
       VALUES
            (%L) 
-         RETURNING *;
+         RETURNING "id", "name", "email", "admin";;
     `,
     Object.keys(payload),
     Object.values(payload)

@@ -16,10 +16,10 @@ const validateCourseExistsMiddleware = async (
     'SELECT * FROM "courses" WHERE "id" = $1;',
     [courseId]
   );
-
-  if (query.rowCount === 0) {
+  if (query.rows.length === 0) {
     throw new AppError("No course found", 404);
   }
+  
 
   next();
 };

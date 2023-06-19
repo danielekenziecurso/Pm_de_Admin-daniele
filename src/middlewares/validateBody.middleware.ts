@@ -6,6 +6,7 @@ const validateBodyMiddleware =
   (req: Request, res: Response, next: NextFunction): void => {
     const validated = schema.parse(req.body);
     res.locals = { ...res.locals, validated };
+
     return next();
   };
 

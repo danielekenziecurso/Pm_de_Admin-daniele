@@ -9,6 +9,7 @@ import { verifyUserPermissionMiddleware } from "../middlewares/verifyUserPermiss
 import { userGetByIdController } from "../controllers/user/userGetById.controller";
 import { validateCourseExistsMiddleware } from "../middlewares/validateCourseExists.middleware";
 import { validateAdminMiddleware } from "../middlewares/validateAdmin.middleware";
+import { validateUserCursoExisteMiddleware } from "../middlewares/validateUserCursoExiste.middleware";
 
 const clientUsers: Router = Router();
 
@@ -30,7 +31,7 @@ clientUsers.get(
   verifyTokenMiddleware,
   verifyUserPermissionMiddleware,
   validateAdminMiddleware,
-  validateCourseExistsMiddleware,
+  validateUserCursoExisteMiddleware,
   userGetByIdController
 );
 

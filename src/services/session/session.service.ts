@@ -13,12 +13,11 @@ const createSession = async (payload: CreateSession): Promise<SessionReturn> => 
   );
 
   if (query.rowCount === 0) {
-    throw new NotFound("Wrong email/password", 404);
+    throw new NotFound("Wrong email/password", 401);
   }
 
   const user: User = query.rows[0];
   const samePassword: boolean = await compare(payload.password, user.password);
-console.log(samePassword)
   if (!samePassword) {
     throw new Unauthorized("Wrong email/password", 401);
   }
