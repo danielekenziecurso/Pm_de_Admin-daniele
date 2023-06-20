@@ -1,22 +1,16 @@
 import { NextFunction, Request, Response } from "express";
-import { verify } from "jsonwebtoken";
-import { Unauthorized } from "../error";
+import { AppError } from "../error";
 
-const verifyTokenMiddleware = (
+export const ensureIsTokenMiddleware = (
   req: Request,
   res: Response,
   next: NextFunction
-): void => {
-  const authorization: string | undefined = req.headers.authorization;
-  if (!authorization) throw new Unauthorized("Missing bearer token", 401);
+): Response | void => {
+  const { decoded } = res.locals;
 
-  const token: string = authorization.split(" ")[1];
+  if (decoded.sub !== req.params.developerId) {
+    throw new AppError("Only the account owner can do this", 403);
+  }
 
-  verify(token, process.env.SECRET_KEY!, (err, decoded) => {
-    if (err) throw new Unauthorized(err.message, 401);
-    res.locals = { ...res.locals, decoded };
-    next();
-  });
+  return next();
 };
-
-export { verifyTokenMiddleware };

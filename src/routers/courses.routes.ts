@@ -2,7 +2,7 @@ import { Router } from "express";
 import { createCourseController } from "../controllers/course/createCourse.controller";
 import { validateBodyMiddleware } from "../middlewares/validateBody.middleware";
 import { courseCreate } from "../schemas/course.schema";
-import { verifyTokenMiddleware } from "../middlewares/verifyToken.middleware";
+import { verifyTokenMiddleware } from "../middlewares/verifyIsToken.middleware";
 import { validateAdminMiddleware } from "../middlewares/validateAdmin.middleware";
 import { coursesReadController } from "../controllers/course/coursesRead.cotroller";
 import { addUserInCourseController } from "../controllers/course/addUserInCourses.controller";
@@ -17,13 +17,12 @@ clientCourses.post(
   "",
   verifyTokenMiddleware,
   validateAdminMiddleware,
+  verifyUserPermissionMiddleware,
   validateBodyMiddleware(courseCreate),
   createCourseController
 );
 clientCourses.get(
   "",
-  verifyTokenMiddleware,
-  validateAdminMiddleware,
   coursesReadController
 );
 clientCourses.post(
@@ -38,6 +37,7 @@ clientCourses.delete(
   "/:courseId/users/:userId",
   verifyTokenMiddleware,
   validateAdminMiddleware,
+  verifyUserPermissionMiddleware,
   verifyUserAndCourseExistsMiddleware,
   deleteUserFromCourseByIdController
 );
@@ -45,6 +45,7 @@ clientCourses.get(
   "/:id/users",
   verifyTokenMiddleware,
   validateAdminMiddleware,
+  verifyUserPermissionMiddleware,
   courseGetByIdController
 );
 

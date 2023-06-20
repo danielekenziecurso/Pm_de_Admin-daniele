@@ -12,7 +12,7 @@ const courseGetByIdService = async (
                 "courses".name AS "courseName", 
                 "courses".description AS "courseDescription"
          FROM 
-               "user_courses"
+               "userCourses"
          JOIN 
               "users" ON "users".id = "userCourses"."userId"
          JOIN 

@@ -4,12 +4,13 @@ import { UserValidetyEmailExistsMiddleware } from "../middlewares/UserValidetyEm
 import { validateBodyMiddleware } from "../middlewares/validateBody.middleware";
 import { userCreate } from "../schemas/user.schema";
 import { usersReadController } from "../controllers/user/usersRead.controller";
-import { verifyTokenMiddleware } from "../middlewares/verifyToken.middleware";
+import { verifyTokenMiddleware } from "../middlewares/verifyIsToken.middleware";
 import { verifyUserPermissionMiddleware } from "../middlewares/verifyUserPermission.middleware";
 import { userGetByIdController } from "../controllers/user/userGetById.controller";
 import { validateCourseExistsMiddleware } from "../middlewares/validateCourseExists.middleware";
 import { validateAdminMiddleware } from "../middlewares/validateAdmin.middleware";
 import { validateUserCursoExisteMiddleware } from "../middlewares/validateUserCursoExiste.middleware";
+import { loginSchema } from "../schemas/session.schema";
 
 const clientUsers: Router = Router();
 

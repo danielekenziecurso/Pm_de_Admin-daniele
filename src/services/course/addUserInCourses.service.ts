@@ -18,9 +18,9 @@ const addUserInCoursesService = async (
         RETURNING *;
     `;
   await client.query(queryString, [userId, courseId]);
+  const message: any = "message"
 
-
-  return { messagem: "User successfully vinculed to course" };
+  return message;
 };
 
 export { addUserInCoursesService };

@@ -3,6 +3,7 @@ import format from "pg-format";
 import { client } from "../../database";
 import { UserCreate, UserReturn } from "../../interfaces/users.interface";
 import { hash } from "bcryptjs";
+import { userWithoutPassword } from "../../schemas/user.schema";
 
 const createUserService = async (payload: UserCreate): Promise<UserReturn> => {
   payload.password = await hash(payload.password, 10);
@@ -13,7 +14,7 @@ const createUserService = async (payload: UserCreate): Promise<UserReturn> => {
            (%I)        
       VALUES
            (%L) 
-         RETURNING "id", "name", "email", "admin";;
+         RETURNING *;
     `,
     Object.keys(payload),
     Object.values(payload)
@@ -21,7 +22,7 @@ const createUserService = async (payload: UserCreate): Promise<UserReturn> => {
 
   const queryResult: QueryResult<UserReturn> = await client.query(formatString);
 
-  return queryResult.rows[0];
+  return userWithoutPassword.parse(queryResult.rows[0]);
 };
 
 export { createUserService };

@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS "users"(
   "name" VARCHAR(50) NOT NULL,
   "email" VARCHAR(50) NOT NULL UNIQUE,
   "password" VARCHAR(120) NOT NULL,
-  "admin" BOOLEAN NOT NULL
+  "admin" BOOLEAN DEFAULT FALSE
 );
 
 CREATE TABLE IF NOT EXISTS "courses"(
@@ -14,9 +14,9 @@ CREATE TABLE IF NOT EXISTS "courses"(
 
 CREATE TABLE IF NOT EXISTS "userCourses"(
   "id" SERIAL PRIMARY KEY,
-  "active" BOOLEAN NOT NULL,
+  "active" BOOLEAN DEFAULT TRUE,
   "userId" INTEGER NOT NULL,
   "courseId" INTEGER NOT NULL,
-  FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE,
+  FOREIGN KEY ("userId") REFERENCES "users"("id"),
   FOREIGN KEY ("courseId") REFERENCES "courses"("id") ON DELETE CASCADE
 );

@@ -5,8 +5,8 @@ const createSessionController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const { validated } = res.locals;
-  const token: SessionReturn = await createSession(validated);
+  // const { validated } = res.locals;
+  const token: SessionReturn = await createSession(req.body);
 
   return res.status(200).json(token);
 };

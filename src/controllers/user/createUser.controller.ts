@@ -6,9 +6,8 @@ const createUserController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const userData: UserCreate = req.body;
 
-  const newUser: UserReturn = await createUserService(res.locals.validated);
+  const newUser: UserReturn = await createUserService(req.body);
 
   return res.status(201).json(newUser);
 };

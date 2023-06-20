@@ -3,11 +3,11 @@ import { ZodTypeAny } from "zod";
 
 const validateBodyMiddleware =
   (schema: ZodTypeAny) =>
-  (req: Request, res: Response, next: NextFunction): void => {
+  (req: Request, res: Response, next: NextFunction): Response | void => {
     const validated = schema.parse(req.body);
-    res.locals = { ...res.locals, validated };
+    req.body = validated
 
-    return next();
+    return next()
   };
 
 export { validateBodyMiddleware };
