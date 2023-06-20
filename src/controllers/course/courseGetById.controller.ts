@@ -6,7 +6,7 @@ const courseGetByIdController = async (
   res: Response
 ): Promise<Response> => {
   const courseId: string = req.params.id;
-
+  
   const courseUsers = await courseGetByIdService(courseId);
 
   return res.status(200).json(courseUsers);

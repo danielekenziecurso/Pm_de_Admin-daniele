@@ -10,7 +10,8 @@ const courseGetByIdService = async (
                 "users".email AS "userEmail", 
                 "courses".id AS "courseId", 
                 "courses".name AS "courseName", 
-                "courses".description AS "courseDescription"
+                "courses".description AS "courseDescription",
+                "userCourses".active AS "userActiveInCourse"
          FROM 
                "userCourses"
          JOIN 
@@ -22,6 +23,7 @@ const courseGetByIdService = async (
   `;
 
   const queryResult = await client.query(queryString, [courseId]);
+  
   const courseUsers: UserCourse[] = queryResult.rows;
 
   return courseUsers;

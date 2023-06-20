@@ -10,6 +10,7 @@ import { verifyUserAndCourseExistsMiddleware } from "../middlewares/verifyUserAn
 import { deleteUserFromCourseByIdController } from "../controllers/course/deleteUserFromCourseById.controller";
 import { courseGetByIdController } from "../controllers/course/courseGetById.controller";
 import { verifyUserPermissionMiddleware } from "../middlewares/verifyUserPermission.middleware";
+import { ensureIsTokenMiddleware } from "../middlewares/verifyToken.middleware";
 
 const clientCourses: Router = Router();
 
