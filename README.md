@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # User e Courses + Permissão de Administrador
 
 # Introdução
@@ -995,3 +996,6 @@ Você foi o desenvolvedor selecionado para implementar o MVP levando em conta o 
   	"message": "Insufficient permission"
   }
   ```
+=======
+# Pm_de_Admin-daniele
+>>>>>>> 7f1d63f89734aa5e3342c5d159a01aa6b185b7c2
